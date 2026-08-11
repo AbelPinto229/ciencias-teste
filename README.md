@@ -21,6 +21,8 @@ Serve dois propósitos:
    raiz com `npm create vite`, instalou a biblioteca do GitHub e não copiou
    código nenhum de lado nenhum.
 
+**No ar:** [biblius-componentes.vercel.app](https://biblius-componentes.vercel.app)
+
 ## Correr
 
 ```bash
