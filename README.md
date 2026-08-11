@@ -1,17 +1,24 @@
-# ciencias-teste
+# O Biblius, construído com a biblioteca de componentes
 
-Aplicação de exemplo que usa a biblioteca
-**[@ciencias/ui](https://github.com/AbelPinto229/ciencias-ui)** para reconstruir
-o Biblius: uma listagem e uma página de detalhe.
+**Isto é o Biblius** — a listagem de publicações e a página de detalhe —
+**reconstruído inteiramente com os componentes da
+[@ciencias/ui](https://github.com/AbelPinto229/ciencias-ui)**.
+
+Não há aqui um único componente de interface escrito à mão. **Doze vêm da
+biblioteca**: o cabeçalho, o rodapé, a barra de pesquisa, a pesquisa avançada, o
+botão e a gaveta de filtros, a ordenação, o número de registos por página, a
+paginação, a barra de seleção, as etiquetas de estado, o índice lateral e os
+cartões da página de detalhe.
 
 Serve dois propósitos:
 
-1. **Mostrar como se usa** — código real de uma aplicação a sério, não um demo
-   de componentes isolados. Vê-se como as peças encaixam numa página inteira.
-2. **Provar que a biblioteca funciona de fora** — foi criada de raiz com
-   `npm create vite`, instalou a biblioteca do GitHub e não copiou código nenhum.
-
-Não há aqui um único componente escrito à mão: **doze** vêm da biblioteca.
+1. **Mostrar como se usa a biblioteca** — código de uma aplicação a sério, não um
+   demo de componentes isolados. Vê-se como as peças encaixam numa página
+   inteira. (Para os componentes um a um, com interruptores para experimentar:
+   [ciencias-ui.vercel.app](https://ciencias-ui.vercel.app).)
+2. **Provar que a biblioteca funciona de fora** — esta aplicação foi criada de
+   raiz com `npm create vite`, instalou a biblioteca do GitHub e não copiou
+   código nenhum de lado nenhum.
 
 ## Correr
 
