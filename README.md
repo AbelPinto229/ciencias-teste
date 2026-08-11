@@ -4,11 +4,12 @@
 **reconstruído inteiramente com os componentes da
 [@ciencias/ui](https://github.com/AbelPinto229/ciencias-ui)**.
 
-Não há aqui um único componente de interface escrito à mão. **Doze vêm da
+Não há aqui um único componente de interface escrito à mão. **Dezoito vêm da
 biblioteca**: o cabeçalho, o rodapé, a barra de pesquisa, a pesquisa avançada, o
-botão e a gaveta de filtros, a ordenação, o número de registos por página, a
-paginação, a barra de seleção, as etiquetas de estado, o índice lateral e os
-cartões da página de detalhe.
+botão e a gaveta de filtros com os seus grupos, a ordenação, o número de registos
+por página, a paginação, a barra de seleção, a caixa de exportação, as etiquetas
+de estado, o índice lateral, a mensagem de lista vazia, a ligação de regresso e
+os cartões e campos da página de detalhe.
 
 Serve dois propósitos:
 

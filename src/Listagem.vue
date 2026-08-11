@@ -12,6 +12,7 @@ import {
   CPerPageSelect,
   CPagination,
   CSelectExportToolbar,
+  CExportModal,
   CStatusPill,
   CEmptyState,
 } from "@ciencias/ui";
@@ -39,6 +40,7 @@ const pagina = ref(1);
 
 const selectMode = ref(false);
 const selecionados = ref(new Set());
+const exportarAberto = ref(false);
 
 const filtradas = computed(() => {
   const termo = query.value.trim().toLowerCase();
@@ -76,6 +78,56 @@ function alternarTodos() {
   selecionados.value = todosSelecionados.value
     ? new Set()
     : new Set(visiveis.value.map((p) => p.id));
+}
+
+const escolhidas = computed(() => publicacoes.filter((p) => selecionados.value.has(p.id)));
+
+function apa(p) {
+  return `${p.autores} (${p.ano}). ${p.titulo}. https://doi.org/${p.doi}`;
+}
+
+function bibtex(p) {
+  return [
+    `@article{biblius${p.id},`,
+    `  title  = {${p.titulo}},`,
+    `  author = {${p.autores}},`,
+    `  year   = {${p.ano}},`,
+    `  doi    = {${p.doi}},`,
+    "}",
+  ].join("\n");
+}
+
+function endnote(p) {
+  return [`%0 Journal Article`, `%T ${p.titulo}`, `%A ${p.autores}`, `%D ${p.ano}`, `%R ${p.doi}`].join("\n");
+}
+
+function csv(lista) {
+  const linhas = [["titulo", "autores", "ano", "tipo", "doi"].join(",")];
+  for (const p of lista) {
+    linhas.push([p.titulo, p.autores, p.ano, p.tipo, p.doi].map((c) => `"${c}"`).join(","));
+  }
+  return linhas.join("\n");
+}
+
+const GERADORES = {
+  CSV: { extensao: "csv", gerar: (lista) => csv(lista) },
+  APA: { extensao: "txt", gerar: (lista) => lista.map(apa).join("\n\n") },
+  BibTeX: { extensao: "bib", gerar: (lista) => lista.map(bibtex).join("\n\n") },
+  EndNote: { extensao: "enw", gerar: (lista) => lista.map(endnote).join("\n\n") },
+};
+
+function exportar(formato) {
+  const { extensao, gerar } = GERADORES[formato];
+  const blob = new Blob([gerar(escolhidas.value)], { type: "text/plain;charset=utf-8" });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `publicacoes.${extensao}`;
+  link.click();
+  URL.revokeObjectURL(url);
+
+  exportarAberto.value = false;
 }
 
 function limparFiltros() {
@@ -150,7 +202,7 @@ function limparFiltros() {
               :selected-count="selecionados.size"
               :all-selected="todosSelecionados"
               @toggle-all="alternarTodos"
-              @export="() => {}"
+              @export="exportarAberto = true"
             />
 
             <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
@@ -218,6 +270,13 @@ function limparFiltros() {
         </div>
       </div>
     </main>
+
+    <CExportModal
+      :open="exportarAberto"
+      :count="selecionados.size"
+      @close="exportarAberto = false"
+      @select="exportar"
+    />
 
     <CAppFooter app-name="Biblius">
       <template #links>
