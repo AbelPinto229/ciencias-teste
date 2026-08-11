@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "@ciencias/ui/theme.css";
+
+/* Sem isto as classes da biblioteca saem sem estilo: o Tailwind v4 não
+   procura classes dentro de node_modules. */
+@source "../node_modules/@ciencias/ui/dist";
