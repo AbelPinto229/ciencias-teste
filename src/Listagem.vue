@@ -156,10 +156,21 @@ function limparFiltros() {
           <template #extra>
             <button
               type="button"
-              class="shrink-0 text-sm font-medium text-gray-600 hover:text-brand-600"
+              :aria-expanded="avancada"
+              class="flex shrink-0 items-center gap-1 text-sm font-medium text-gray-600 hover:text-brand-600"
               @click="avancada = !avancada"
             >
               Pesquisa Avançada
+              <svg
+                class="h-3.5 w-3.5 transition-transform"
+                :class="avancada ? 'rotate-180' : ''"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
           </template>
         </CSearchBar>
